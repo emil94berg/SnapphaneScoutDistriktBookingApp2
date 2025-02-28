@@ -91,19 +91,19 @@ public partial class Canoe : ContentPage
 		Models.Customer.TypeOfBooking bookingtype = Models.Customer.TypeOfBooking.None;
 		if(checkCanoe.IsChecked == true)
 		{
-			bookingtype |= Models.Customer.TypeOfBooking.Canoe;
+			bookingtype |= Models.Customer.TypeOfBooking.Kanot;
 		}
 		if(checkCabin.IsChecked == true)
 		{
-			bookingtype |= Models.Customer.TypeOfBooking.Cabin;
+			bookingtype |= Models.Customer.TypeOfBooking.Stuga;
 		}
 		if(checkLeanTo.IsChecked == true)
 		{
-			bookingtype |= Models.Customer.TypeOfBooking.LeanTo;
+			bookingtype |= Models.Customer.TypeOfBooking.Vindskydd;
 		}
 		if(checkCampGrounds.IsChecked == true)
 		{
-			bookingtype |= Models.Customer.TypeOfBooking.CampGrounds;
+			bookingtype |= Models.Customer.TypeOfBooking.Lägerplats;
 		}
 
 		
@@ -113,7 +113,7 @@ public partial class Canoe : ContentPage
 			Phone = myPhone.Text,
 			Email = myEmail.Text,
 			IsOrg = myCheckBox.IsChecked,
-			OrgName = (myCheckBox.IsChecked == true ? hiddenLabel.Text : ""),
+			OrgName = (myCheckBox.IsChecked == true ? orgNameInput.Text : ""),
 			StartDate = MyStartDate.Date,
 			EndDate = MyEndDate.Date,
 			BookingType = bookingtype,

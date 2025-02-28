@@ -14,14 +14,35 @@ namespace SnapphaneScoutDistriktBookingApp
     {
         public static async Task SendEmail(string apiKey, string fromEmail, string toEmail, Models.Customer costumer)
         {
+            string bokningsNummer = "";
+            if(costumer.NumberOfCanoes != null)
+            {
+                bokningsNummer += "\n Antal kanoter: " + costumer.NumberOfCanoes;
+            }
+            if(costumer.NumberOfCampground != null)
+            {
+                bokningsNummer += "\n Antal personer för lägerområde: " + costumer.NumberOfCampground;
+            }
+            if(costumer.NumberOfLeanTo != null)
+            {
+                bokningsNummer += "\n Antal vindskydd: " + costumer.NumberOfLeanTo;
+            }
+            if(costumer.NumberOfCabin != null)
+            {
+                bokningsNummer += "\n Antal i stugan: " + costumer.NumberOfCabin;
+            }
+
+
 
 
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(fromEmail, "Snapphane Scoutdistrikt");
             var subject = "Bokning av" + costumer.BookingType;
             var to = new EmailAddress(toEmail, "Mottagare");
-            var plainTextContent = $"Namn: {costumer.Name} \n Tele nr: {costumer.Phone} \n Email: {costumer.Email} \n Vill boka \n {costumer.BookingType}"; //info //Namn
-            var htmlContent = $"<strong> {plainTextContent} </strong>"; //info //Namn
+            string plainTextContent = $"Namn: {costumer.Name} \t Tele nr: {costumer.Phone} \t Email: {costumer.Email} \t Vill boka {costumer.BookingType} \t {bokningsNummer}" +
+                $"\t Perioden: {costumer.StartDate} - {costumer.EndDate} \t Orginisation: {(costumer.IsOrg ? costumer.OrgName : "ingen org")}"; //info //Namn
+            string infoString = plainTextContent.Replace("\t", "<br>");
+            var htmlContent = $"<strong> {infoString} </strong>"; //info //Namn
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
             var response = await client.SendEmailAsync(msg);

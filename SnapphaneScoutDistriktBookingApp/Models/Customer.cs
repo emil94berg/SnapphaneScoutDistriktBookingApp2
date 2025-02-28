@@ -12,10 +12,10 @@ namespace SnapphaneScoutDistriktBookingApp.Models
         public enum TypeOfBooking
         {
             None = 0,
-            Canoe = 1,
-            CampGrounds = 2,
-            LeanTo = 3,
-            Cabin = 4
+            Kanot = 1,
+            Lägerplats = 2,
+            Vindskydd = 3,
+            Stuga = 4
         }
 
         public string Name { get; set; }
