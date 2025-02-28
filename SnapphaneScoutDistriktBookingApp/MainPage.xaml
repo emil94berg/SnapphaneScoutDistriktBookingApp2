@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnapphaneScoutDistriktBookingApp.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="logga.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="Logga för hultet" />
+
+            <Label
+                Text="Välkommen!"
+                FontFamily="OldGerman"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Snapphane Scoutdistrikt"
+                FontFamily="OldGerman"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Välkommen" />
+
+            <Grid
+                ColumnDefinitions="100, 100"
+                RowDefinitions="100, 100"
+                Padding="10"
+                RowSpacing="20"
+                ColumnSpacing="20"
+                >
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="BokaKanot"
+                    Text="Boka kanoter"
+                    Clicked="OnChangeToCanoe"
+                ></Button>
+                
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    x:Name="BokaStuga"
+                    Text="Boka stugan"
+                    Clicked="OnChangeToCabin"
+                    ></Button>
+                
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    x:Name="BokaLägerOmråde"
+                    Text="Boka lägerområdet"
+                    Clicked="OnChangeToCampGrounds"
+                    ></Button>
+                
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    x:Name="BokaVindskydd"
+                    Text="Boka vindskydd"
+                    Clicked="OnChangeToLeanTo"
+                    ></Button>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
