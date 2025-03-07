@@ -17,19 +17,19 @@ namespace SnapphaneScoutDistriktBookingApp
             string bokningsNummer = "";
             if(costumer.NumberOfCanoes != null)
             {
-                bokningsNummer += "\n Antal kanoter: " + costumer.NumberOfCanoes;
+                bokningsNummer += "<br> Antal kanoter: " + costumer.NumberOfCanoes;
             }
             if(costumer.NumberOfCampground != null)
             {
-                bokningsNummer += "\n Antal personer för lägerområde: " + costumer.NumberOfCampground;
+                bokningsNummer += "<br> Antal personer för lägerområde: " + costumer.NumberOfCampground;
             }
             if(costumer.NumberOfLeanTo != null)
             {
-                bokningsNummer += "\n Antal vindskydd: " + costumer.NumberOfLeanTo;
+                bokningsNummer += "<br> Antal vindskydd: " + costumer.NumberOfLeanTo;
             }
             if(costumer.NumberOfCabin != null)
             {
-                bokningsNummer += "\n Antal i stugan: " + costumer.NumberOfCabin;
+                bokningsNummer += "<br> Antal i stugan: " + costumer.NumberOfCabin;
             }
 
 

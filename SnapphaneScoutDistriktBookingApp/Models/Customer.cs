@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace SnapphaneScoutDistriktBookingApp.Models
 {
@@ -17,7 +19,8 @@ namespace SnapphaneScoutDistriktBookingApp.Models
             Vindskydd = 3,
             Stuga = 4
         }
-
+        [BsonId]
+        public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

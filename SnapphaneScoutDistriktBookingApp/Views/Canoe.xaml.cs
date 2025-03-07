@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace SnapphaneScoutDistriktBookingApp;
 
@@ -85,7 +86,7 @@ public partial class Canoe : ContentPage
 
         }
     }
-    private void OnConformation(object sender, EventArgs e)
+    private async Task OnConformation(object sender, EventArgs e)
     {
 
 		Models.Customer.TypeOfBooking bookingtype = Models.Customer.TypeOfBooking.None;
@@ -122,7 +123,7 @@ public partial class Canoe : ContentPage
 			NumberOfCampground = int.TryParse(Lägerområde.Text, out int result2) ? result2 : null,
 			NumberOfLeanTo = int.TryParse(Vindskydd.Text, out int result3) ? result3 : null
 		};
-
+		await Data.DB.MongoDBService.BookingCollection().InsertOneAsync(custumer);
 		API.SendEmail("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", "emil.berg@campusnykoping.se", custumer.Email, custumer);
 		
     }

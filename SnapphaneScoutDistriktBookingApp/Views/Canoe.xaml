@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnapphaneScoutDistriktBookingApp.Canoe"
              Title="Canoe">
+    
     <VerticalStackLayout>
         <Label 
             Text="Boka kanoter"
@@ -104,6 +105,7 @@
             <Label Text="Boka vindskydd" ></Label>
             <Entry x:Name="Vindskydd" IsVisible="False" Placeholder="Hur många vindskydd önskas?" Keyboard="Numeric" ></Entry>
         </HorizontalStackLayout>
+        
 
 
 
