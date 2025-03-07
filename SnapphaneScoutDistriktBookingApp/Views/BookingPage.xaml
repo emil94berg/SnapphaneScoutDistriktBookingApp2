@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnapphaneScoutDistriktBookingApp.Canoe"
-             Title="Canoe">
+             Title="Bokningssida">
     
+
     <VerticalStackLayout>
+        <Label x:Name="Lediga_kanoter" Text="" ></Label>
         <Label 
             Text="Boka kanoter"
             VerticalOptions="Center" 
@@ -21,23 +23,7 @@
             x:Name="myEmail"
             Placeholder="Email"
             ></Entry>
-        <DatePicker
-            x:Name="MyStartDate"
-            Date="{Binding MyStartDate}"
-            MinimumDate="2000-01-01"
-            MaximumDate="2100-12-31"
-            Format="yyyy-MM-dd"
-            ></DatePicker>
-        <DatePicker
-            x:Name="MyEndDate"
-            Date="{Binding MyEndDate}"
-            MinimumDate="2000-01-01"
-            MaximumDate="2100-12-31"
-            Format="yyyy-MM-dd"
-            ></DatePicker>
-
-
-
+        
         <HorizontalStackLayout>
         <CheckBox
             x:Name="myCheckBox"
@@ -60,7 +46,22 @@
             Placeholder="Scoutkår"
             IsVisible="False"
             ></Entry>
-
+        <DatePicker
+            x:Name="MyStartDate"
+            Date="{Binding MyStartDate}"
+            MinimumDate="2000-01-01"
+            MaximumDate="2100-12-31"
+            Format="yyyy-MM-dd"
+            
+            ></DatePicker>
+                <DatePicker
+            x:Name="MyEndDate"
+            Date="{Binding MyEndDate}"
+            MinimumDate="2000-01-01"
+            MaximumDate="2100-12-31"
+            Format="yyyy-MM-dd"
+            
+            ></DatePicker>
 
         <HorizontalStackLayout Spacing="10">
             <CheckBox
@@ -76,8 +77,8 @@
                 IsVisible="False"
                 Keyboard="Numeric"
                 Placeholder="Hur många kanoter önskas?"
-                
             ></Entry>
+            
         </HorizontalStackLayout>
         <HorizontalStackLayout Spacing="10">
             <CheckBox
@@ -119,4 +120,5 @@
             Clicked="OnConformation"
             ></Button>
     </VerticalStackLayout>
+    
 </ContentPage>

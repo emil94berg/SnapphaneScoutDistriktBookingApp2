@@ -5,6 +5,9 @@ using Microsoft.Maui.Controls;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Syncfusion.Maui.Calendar;
+using SnapphaneScoutDistriktBookingApp.Data;
+using MongoDB.Driver;
 
 namespace SnapphaneScoutDistriktBookingApp;
 
@@ -14,8 +17,10 @@ public partial class Canoe : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = new BookingViewModel();
-
-	}
+		var task = Task.Run(() => ViableCanoesInt());
+		task.Wait();
+		Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result).ToString();
+    }
     private void OnCheckChange(object sender, CheckedChangedEventArgs e)
     {
 		if (e.Value)
@@ -86,7 +91,7 @@ public partial class Canoe : ContentPage
 
         }
     }
-    private async Task OnConformation(object sender, EventArgs e)
+    private async void OnConformation(object sender, EventArgs e)
     {
 
 		Models.Customer.TypeOfBooking bookingtype = Models.Customer.TypeOfBooking.None;
@@ -123,7 +128,7 @@ public partial class Canoe : ContentPage
 			NumberOfCampground = int.TryParse(Lägerområde.Text, out int result2) ? result2 : null,
 			NumberOfLeanTo = int.TryParse(Vindskydd.Text, out int result3) ? result3 : null
 		};
-		await Data.DB.MongoDBService.BookingCollection().InsertOneAsync(custumer);
+		await Data.DB.BookingCollection().InsertOneAsync(custumer);
 		API.SendEmail("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", "emil.berg@campusnykoping.se", custumer.Email, custumer);
 		
     }
@@ -134,10 +139,13 @@ public partial class Canoe : ContentPage
 		if (e.Value)
 		{
 			AntalKanoter.IsVisible = true;
+			
 		}
 		else
 		{
 			AntalKanoter.IsVisible = false;
+            
+
         }
     }
 
@@ -176,4 +184,15 @@ public partial class Canoe : ContentPage
             Vindskydd.IsVisible = false;
         }
     }
+	public async Task<int> ViableCanoesInt()
+	{
+		
+		var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= DateTime.Now)).ToListAsync();
+
+		int totalSum = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
+
+		return totalSum;
+	}
+
+
 }

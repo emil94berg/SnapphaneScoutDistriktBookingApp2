@@ -9,8 +9,7 @@ namespace SnapphaneScoutDistriktBookingApp.Data
 {
     class DB
     {
-        public class MongoDBService
-        {
+        
             private static MongoClient GetClient()
             {
                 const string connectionUri = "mongodb+srv://dbAdmin:DBadmin00@hultetbooking.h5urq.mongodb.net/?retryWrites=true&w=majority&appName=HultetBooking";
@@ -28,7 +27,7 @@ namespace SnapphaneScoutDistriktBookingApp.Data
                 var bookingCollection = database.GetCollection<Models.Customer>("bookings");
                 return bookingCollection;
             }
-        }
+        
     }
 }
 

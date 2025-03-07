@@ -6,7 +6,9 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
+            Spacing="25"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
             <Image
                 Source="logga.png"
                 HeightRequest="185"
@@ -27,11 +29,13 @@
                 SemanticProperties.Description="Välkommen" />
 
             <Grid
-                ColumnDefinitions="100, 100"
-                RowDefinitions="100, 100"
+                ColumnDefinitions="*, *"
+                RowDefinitions="auto, auto"
                 Padding="10"
                 RowSpacing="20"
                 ColumnSpacing="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
                 >
                 <Button
                     Grid.Row="0"
@@ -39,6 +43,8 @@
                     x:Name="BokaKanot"
                     Text="Boka kanoter"
                     Clicked="OnChangeToCanoe"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                 ></Button>
                 
                 <Button
@@ -47,6 +53,8 @@
                     x:Name="BokaStuga"
                     Text="Boka stugan"
                     Clicked="OnChangeToCabin"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     ></Button>
                 
                 <Button
@@ -55,6 +63,8 @@
                     x:Name="BokaLägerOmråde"
                     Text="Boka lägerområdet"
                     Clicked="OnChangeToCampGrounds"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     ></Button>
                 
                 <Button
@@ -63,6 +73,8 @@
                     x:Name="BokaVindskydd"
                     Text="Boka vindskydd"
                     Clicked="OnChangeToLeanTo"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
                     ></Button>
             </Grid>
         </VerticalStackLayout>
