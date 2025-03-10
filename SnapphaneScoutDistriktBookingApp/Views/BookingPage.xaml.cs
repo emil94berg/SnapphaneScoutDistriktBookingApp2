@@ -16,10 +16,12 @@ public partial class Canoe : ContentPage
     public Canoe()
 	{
 		InitializeComponent();
-		BindingContext = new BookingViewModel();
+		BindingContext = new ViewModels.BookingViewModel();
 		var task = Task.Run(() => ViableCanoesInt());
 		task.Wait();
-		Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result).ToString();
+		Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result[0]).ToString();
+		Lediga_stugor.Text = "Lediga stugor : " + (1 - task.Result[1]).ToString();
+		Lediga_vindskydd.Text = "Lediga vindskydd : " + (4 - task.Result[2]).ToString();
     }
     private void OnCheckChange(object sender, CheckedChangedEventArgs e)
     {
@@ -36,61 +38,7 @@ public partial class Canoe : ContentPage
 			orgNameInput.IsVisible = false;
 		}
     }
-	public partial class BookingViewModel : ObservableObject
-	{
-		[ObservableProperty]
-		private DateTime startDate = DateTime.Today;
-
-        [ObservableProperty]
-        private DateTime endDate = DateTime.Today.AddDays(1);
-
-		public ICommand SelectStartDateCommand => new AsyncRelayCommand(async () => await SelectStartDate());
-        public ICommand SelectEndDateCommand => new AsyncRelayCommand(async () => await SelectEndDate());
-		private async Task SelectStartDate()
-		{
-            DateTime? result = await ShowDatePicker(StartDate);
-            if (result.HasValue)
-            {
-                StartDate = result.Value;
-            }
-        }
-        private async Task SelectEndDate()
-        {
-			DateTime? result = await ShowDatePicker(EndDate);
-			if(result.HasValue)
-			{
-				EndDate = result.Value;
-			}
-        }
-		private async Task<DateTime?> ShowDatePicker(DateTime initalDate)
-		{
-			var datePicker = new DatePicker { Date = initalDate };
-
-			var popup = new ContentPage
-			{
-				Content = new VerticalStackLayout
-				{
-					Padding = 20,
-					Children =
-					{
-						new Label { Text = "Välj ett datum", FontSize = 20},
-						datePicker,
-						new Button
-						{
-							Text = "OK",
-							Command = new Command(() => Application.Current.MainPage.Navigation.PopModalAsync()) 
-							
-						}
-					}
-				}
-			};
-			await Application.Current.MainPage.Navigation.PushModalAsync(popup);
-			await Task.Delay(100);
-			
-			return datePicker.Date;
-
-        }
-    }
+	
     private async void OnConformation(object sender, EventArgs e)
     {
 
@@ -184,14 +132,35 @@ public partial class Canoe : ContentPage
             Vindskydd.IsVisible = false;
         }
     }
-	public async Task<int> ViableCanoesInt()
+	public async Task<int[]> ViableCanoesInt()
 	{
-		
 		var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= DateTime.Now)).ToListAsync();
-
-		int totalSum = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
-
-		return totalSum;
+		int[] totalSum = new int[4];
+		totalSum[0] = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
+		if (totalSum[0] >= 14)
+		{
+			checkCanoe.IsVisible = false;
+			BokaKanotNamn.IsVisible = false;
+		}
+		totalSum[1] = bookingCollection.Sum(x => x.NumberOfCabin.GetValueOrDefault());
+		if (totalSum[1] >= 1)
+		{
+			checkCabin.IsVisible = false;
+			BokaStugaNamn.IsVisible = false;
+		}
+        totalSum[2] = bookingCollection.Sum(x => x.NumberOfLeanTo.GetValueOrDefault());
+		if (totalSum[2] >= 4)
+		{
+			checkLeanTo.IsVisible = false;
+			BokaVindskyddNamn.IsVisible = false;
+		}
+        totalSum[3] = bookingCollection.Sum(x => x.NumberOfCampground.GetValueOrDefault());
+		if (totalSum[3] >= 1000)
+		{
+			checkCampGrounds.IsVisible = false;
+			BokaLägerområdeNamn.IsVisible = false;
+		}
+        return totalSum;
 	}
 
 

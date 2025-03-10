@@ -6,7 +6,13 @@
     
 
     <VerticalStackLayout>
-        <Label x:Name="Lediga_kanoter" Text="" ></Label>
+        <HorizontalStackLayout Spacing="10">
+            <Label x:Name="Lediga_kanoter" Text="" ></Label>
+            <Label x:Name="Lediga_stugor" Text="" ></Label>
+            <Label x:Name="Lediga_lägerområden" Text="" ></Label>
+            <Label x:Name="Lediga_vindskydd" Text="" ></Label>
+        </HorizontalStackLayout>
+       
         <Label 
             Text="Boka kanoter"
             VerticalOptions="Center" 
@@ -70,7 +76,7 @@
             CheckedChanged="OnCheckCanoe"
             ></CheckBox>
         <Label
-            Text="Boka kanot"
+            x:Name="BokaKanotNamn" Text="Boka kanot"
             ></Label>
             <Entry
                 x:Name="AntalKanoter"
@@ -87,7 +93,7 @@
             CheckedChanged="OnCheckCabin"
             ></CheckBox>
             <Label
-            Text="Boka stuga"
+            x:Name="BokaStugaNamn" Text="Boka stuga"
             ></Label>
             <Entry
                 x:Name="AntalStuga"
@@ -98,12 +104,12 @@
         </HorizontalStackLayout>
         <HorizontalStackLayout Spacing="10">
             <CheckBox x:Name="checkCampGrounds" IsChecked="False" CheckedChanged="OnCampGrounds" ></CheckBox>
-            <Label Text="Boka lägerområde" ></Label>
+            <Label x:Name="BokaLägerområdeNamn" Text="Boka lägerområde" ></Label>
             <Entry x:Name="Lägerområde" IsVisible="False" Placeholder="Hur många i sällskapet?" Keyboard="Numeric" ></Entry>
         </HorizontalStackLayout>
         <HorizontalStackLayout Spacing="10">
             <CheckBox x:Name="checkLeanTo" IsChecked="False" CheckedChanged="OnLeanTo" ></CheckBox>
-            <Label Text="Boka vindskydd" ></Label>
+            <Label x:Name="BokaVindskyddNamn" Text="Boka vindskydd" ></Label>
             <Entry x:Name="Vindskydd" IsVisible="False" Placeholder="Hur många vindskydd önskas?" Keyboard="Numeric" ></Entry>
         </HorizontalStackLayout>
         

@@ -84,10 +84,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Compile Update="Views\BookingPage.xaml.cs">
 	    <DependentUpon>BookingPage.xaml</DependentUpon>
 	  </Compile>
