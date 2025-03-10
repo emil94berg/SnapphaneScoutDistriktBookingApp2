@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SnapphaneScoutDistriktBookingApp.MainPage">
+             x:Class="SnapphaneScoutDistriktBookingApp.MainPage"
+             >
 
     <ScrollView>
         <VerticalStackLayout
@@ -16,7 +17,8 @@
                 SemanticProperties.Description="Logga för hultet" />
 
             <Label
-                Text="Välkommen!"
+                Text="{Binding UserName, StringFormat='Välkommen {0}'}"
+                TextColor="Black"
                 FontFamily="OldGerman"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
@@ -25,6 +27,7 @@
                 Text="Snapphane Scoutdistrikt"
                 FontFamily="OldGerman"
                 Style="{StaticResource SubHeadline}"
+                TextColor="Black"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Välkommen" />
 
@@ -45,6 +48,8 @@
                     Clicked="OnChangeToCanoe"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    
+                    
                 ></Button>
                 
                 <Button
@@ -55,6 +60,7 @@
                     Clicked="OnChangeToCabin"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    
                     ></Button>
                 
                 <Button
@@ -65,6 +71,7 @@
                     Clicked="OnChangeToCampGrounds"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    
                     ></Button>
                 
                 <Button
@@ -75,8 +82,10 @@
                     Clicked="OnChangeToLeanTo"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    
                     ></Button>
             </Grid>
+            <Button Text="Ändra användare" Clicked="OnResetUser" ></Button>
         </VerticalStackLayout>
     </ScrollView>
 

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnapphaneScoutDistriktBookingApp.Canoe"
-             Title="Bokningssida">
+             Title="Bokningssida"
+             >
     
 
     <VerticalStackLayout>
@@ -19,7 +20,8 @@
             HorizontalOptions="Center" />
         <Entry
             x:Name="myName"
-            Placeholder="För- och efternamn"
+            Placeholder="Skriv in för och efternamn"
+            Text="{Binding UserName}"
             ></Entry>
         <Entry
             x:Name="myPhone"
@@ -27,7 +29,8 @@
             ></Entry>
         <Entry
             x:Name="myEmail"
-            Placeholder="Email"
+            Placeholder="Skriv in din email"
+            Text="{Binding UserEmail}"
             ></Entry>
         
         <HorizontalStackLayout>

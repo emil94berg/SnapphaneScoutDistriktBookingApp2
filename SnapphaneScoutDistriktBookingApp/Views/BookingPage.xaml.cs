@@ -17,6 +17,7 @@ public partial class Canoe : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = new ViewModels.BookingViewModel();
+		BindingContext = UserSession.Instance;
 		var task = Task.Run(() => ViableCanoesInt());
 		task.Wait();
 		Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result[0]).ToString();
