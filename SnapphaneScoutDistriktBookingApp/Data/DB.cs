@@ -10,23 +10,23 @@ namespace SnapphaneScoutDistriktBookingApp.Data
     class DB
     {
         
-            private static MongoClient GetClient()
-            {
-                const string connectionUri = "mongodb+srv://dbAdmin:DBadmin00@hultetbooking.h5urq.mongodb.net/?retryWrites=true&w=majority&appName=HultetBooking";
-                var settings = MongoClientSettings.FromConnectionString(connectionUri);
-                settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-                var client = new MongoClient(settings);
-                return client;
-            }
+        private static MongoClient GetClient()
+        {
+            const string connectionUri = "mongodb+srv://dbAdmin:DBadmin00@hultetbooking.h5urq.mongodb.net/?retryWrites=true&w=majority&appName=HultetBooking";
+            var settings = MongoClientSettings.FromConnectionString(connectionUri);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+            var client = new MongoClient(settings);
+            return client;
+        }
 
-            public static IMongoCollection<Models.Customer> BookingCollection()
-            {
-                var client = GetClient();
+        public static IMongoCollection<Models.Customer> BookingCollection()
+        {
+            var client = GetClient();
 
-                var database = client.GetDatabase("bookingsDB");
-                var bookingCollection = database.GetCollection<Models.Customer>("bookings");
-                return bookingCollection;
-            }
+            var database = client.GetDatabase("bookingsDB");
+            var bookingCollection = database.GetCollection<Models.Customer>("bookings");
+            return bookingCollection;
+        }
         
     }
 }

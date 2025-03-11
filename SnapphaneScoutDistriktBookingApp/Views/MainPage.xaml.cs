@@ -16,7 +16,7 @@ namespace SnapphaneScoutDistriktBookingApp
 
         private async void OnChangeToCanoe(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Canoe());
+            await Navigation.PushAsync(new BookingPage());
         }
 
         private async void OnChangeToCabin(object sender, EventArgs e)

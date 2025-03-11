@@ -8,21 +8,23 @@ using System.Threading.Tasks;
 using Syncfusion.Maui.Calendar;
 using SnapphaneScoutDistriktBookingApp.Data;
 using MongoDB.Driver;
+using SnapphaneScoutDistriktBookingApp.ViewModels;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 
 namespace SnapphaneScoutDistriktBookingApp;
 
-public partial class Canoe : ContentPage
+public partial class BookingPage : ContentPage
 {
-    public Canoe()
+    public BookingPage()
 	{
 		InitializeComponent();
 		BindingContext = new ViewModels.BookingViewModel();
-		BindingContext = UserSession.Instance;
-		var task = Task.Run(() => ViableCanoesInt());
-		task.Wait();
-		Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result[0]).ToString();
-		Lediga_stugor.Text = "Lediga stugor : " + (1 - task.Result[1]).ToString();
-		Lediga_vindskydd.Text = "Lediga vindskydd : " + (4 - task.Result[2]).ToString();
+        myName.Text = UserSession.Instance.UserName;
+        myEmail.Text = UserSession.Instance.UserEmail;
+        
+        //Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result[0]).ToString();
+        //Lediga_stugor.Text = "Lediga stugor : " + (1 - task.Result[1]).ToString();
+        //Lediga_vindskydd.Text = "Lediga vindskydd : " + (4 - task.Result[2]).ToString();
     }
     private void OnCheckChange(object sender, CheckedChangedEventArgs e)
     {
@@ -79,7 +81,25 @@ public partial class Canoe : ContentPage
 		};
 		await Data.DB.BookingCollection().InsertOneAsync(custumer);
 		API.SendEmail("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", "emil.berg@campusnykoping.se", custumer.Email, custumer);
-		
+        var popup = new ContentPage
+        {
+            Content = new VerticalStackLayout
+            {
+                Padding = 20,
+                Children =
+                    {
+                        new Label { Text = "Tack för din bokning!"},
+
+                        new Button
+                        {
+                            Text = "Tillbaka till startsidan",
+                            Command = new Command(async () => await Navigation.PushModalAsync(new MainPage()))
+
+                        }
+                    }
+            }
+        };
+        await Navigation.PushModalAsync(popup);
     }
 	
 
@@ -88,13 +108,10 @@ public partial class Canoe : ContentPage
 		if (e.Value)
 		{
 			AntalKanoter.IsVisible = true;
-			
 		}
 		else
 		{
 			AntalKanoter.IsVisible = false;
-            
-
         }
     }
 
@@ -133,36 +150,35 @@ public partial class Canoe : ContentPage
             Vindskydd.IsVisible = false;
         }
     }
-	public async Task<int[]> ViableCanoesInt()
-	{
-		var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= DateTime.Now)).ToListAsync();
-		int[] totalSum = new int[4];
-		totalSum[0] = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
-		if (totalSum[0] >= 14)
-		{
-			checkCanoe.IsVisible = false;
-			BokaKanotNamn.IsVisible = false;
-		}
-		totalSum[1] = bookingCollection.Sum(x => x.NumberOfCabin.GetValueOrDefault());
-		if (totalSum[1] >= 1)
-		{
-			checkCabin.IsVisible = false;
-			BokaStugaNamn.IsVisible = false;
-		}
-        totalSum[2] = bookingCollection.Sum(x => x.NumberOfLeanTo.GetValueOrDefault());
-		if (totalSum[2] >= 4)
-		{
-			checkLeanTo.IsVisible = false;
-			BokaVindskyddNamn.IsVisible = false;
-		}
-        totalSum[3] = bookingCollection.Sum(x => x.NumberOfCampground.GetValueOrDefault());
-		if (totalSum[3] >= 1000)
-		{
-			checkCampGrounds.IsVisible = false;
-			BokaLägerområdeNamn.IsVisible = false;
-		}
-        return totalSum;
-	}
+
+    
+    //public static async Task<int[]> ViableCanoesInt()
+    //{
+    //    var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= DateTime.Today)).ToListAsync();
+    //    int[] totalSum = new int[4];
+    //    totalSum[0] = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
+    //    if (totalSum[0] >= 14)
+    //    {
+
+    //    }
+    //    totalSum[1] = bookingCollection.Sum(x => x.NumberOfCabin.GetValueOrDefault());
+    //    if (totalSum[1] >= 1)
+    //    {
+
+    //    }
+    //    totalSum[2] = bookingCollection.Sum(x => x.NumberOfLeanTo.GetValueOrDefault());
+    //    if (totalSum[2] >= 4)
+    //    {
+
+    //    }
+    //    totalSum[3] = bookingCollection.Sum(x => x.NumberOfCampground.GetValueOrDefault());
+    //    if (totalSum[3] >= 1000)
+    //    {
+
+    //    }
+    //    return totalSum;
+    //}
+
 
 
 }
