@@ -18,7 +18,7 @@ public partial class BookingPage : ContentPage
     public BookingPage()
 	{
 		InitializeComponent();
-		BindingContext = new ViewModels.BookingViewModel();
+		BindingContext = new BookingViewModel();
         myName.Text = UserSession.Instance.UserName;
         myEmail.Text = UserSession.Instance.UserEmail;
         
@@ -151,34 +151,8 @@ public partial class BookingPage : ContentPage
         }
     }
 
-    
-    //public static async Task<int[]> ViableCanoesInt()
-    //{
-    //    var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= DateTime.Today)).ToListAsync();
-    //    int[] totalSum = new int[4];
-    //    totalSum[0] = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
-    //    if (totalSum[0] >= 14)
-    //    {
-
-    //    }
-    //    totalSum[1] = bookingCollection.Sum(x => x.NumberOfCabin.GetValueOrDefault());
-    //    if (totalSum[1] >= 1)
-    //    {
-
-    //    }
-    //    totalSum[2] = bookingCollection.Sum(x => x.NumberOfLeanTo.GetValueOrDefault());
-    //    if (totalSum[2] >= 4)
-    //    {
-
-    //    }
-    //    totalSum[3] = bookingCollection.Sum(x => x.NumberOfCampground.GetValueOrDefault());
-    //    if (totalSum[3] >= 1000)
-    //    {
-
-    //    }
-    //    return totalSum;
-    //}
-
-
-
+    private void OnSelectedStartDate(object sender, DateChangedEventArgs e)
+    {
+        
+    }
 }

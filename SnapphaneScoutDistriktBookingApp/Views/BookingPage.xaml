@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnapphaneScoutDistriktBookingApp.BookingPage"
              Title="Bokningssida"
+             BackgroundColor="DarkGrey"
              >
     
 
@@ -54,21 +55,19 @@
             ></Entry>
         <DatePicker
             x:Name="MyStartDate"
-            Date="{Binding MyStartDate}"
+            Date="{Binding NewStartDate}"
             MinimumDate="2000-01-01"
             MaximumDate="2100-12-31"
             Format="yyyy-MM-dd"
-            
             ></DatePicker>
                 <DatePicker
             x:Name="MyEndDate"
-            Date="{Binding MyEndDate}"
+            Date="{Binding NewEndDate}"
             MinimumDate="2000-01-01"
             MaximumDate="2100-12-31"
             Format="yyyy-MM-dd"
-            
             ></DatePicker>
-
+        <Label Text="{Binding NewEndDate}" ></Label>
         <HorizontalStackLayout Spacing="10">
             <CheckBox
             x:Name="checkCanoe"

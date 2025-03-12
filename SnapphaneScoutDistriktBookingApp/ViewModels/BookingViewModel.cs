@@ -12,35 +12,65 @@ using System.Windows.Input;
 
 namespace SnapphaneScoutDistriktBookingApp.ViewModels
 {
-    public partial class BookingViewModel : ObservableObject
+    class BookingViewModel : INotifyPropertyChanged
     {
-        public BookingViewModel()
-        {
-            LoadViableNumbers();
+        public event PropertyChangedEventHandler? PropertyChanged;
+        
+        private string _canoesAvailable;
+        public string CanoesAvailable { get { return _canoesAvailable; }
+            set
+            {
+                _canoesAvailable = value;
+                OnPropertyChanged();
+                //LoadViableNumbers();
+            }
         }
 
-        
-        [ObservableProperty]
-        private string _canoesAvailable;
-       
-        [ObservableProperty]
         private string _cabinAvailable;
-       
-        [ObservableProperty]
-        private string _leanToAvailable;
-       
-        [ObservableProperty]
-        private string _campGroundAvailable;
-       
+        public string CabinAvailable { get { return _cabinAvailable; } set
+            {
+                _cabinAvailable = value;
+                OnPropertyChanged();
+                //LoadViableNumbers();
+            }
+        }
 
+        private string _leanToAvailable;
+        public string LeanToAvailable
+        {
+            get { return _leanToAvailable; }
+            set
+            {
+                _leanToAvailable = value;
+                OnPropertyChanged();
+                //LoadViableNumbers();
+            }
+        }
+
+
+        private string _campGroundAvailable;
+        public string CampGroundAvailable
+        {
+            get { return _campGroundAvailable; }
+            set
+            {
+                _campGroundAvailable = value;
+                OnPropertyChanged();
+                //LoadViableNumbers();
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public async void LoadViableNumbers()
         {
-            int[] thisNumbers = await ViableCanoesInt();
-            CanoesAvailable = (14-thisNumbers[0]).ToString();
-            CabinAvailable = (1-thisNumbers[1]).ToString();
-            LeanToAvailable = (4-thisNumbers[2]).ToString();
-            CampGroundAvailable = thisNumbers[3].ToString();
-
+            int[] numbers = await ViableCanoesInt();
+            CanoesAvailable = (14-numbers[0]).ToString();
+            CabinAvailable = (1-numbers[1]).ToString();
+            LeanToAvailable = (4-numbers[2]).ToString();
+            CampGroundAvailable = numbers[3].ToString();
         }
 
         public async Task<int[]> ViableCanoesInt()
@@ -60,83 +90,88 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             return totalSum;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //----------------------------------------------------------------------------------------
-        [ObservableProperty]
-        private DateTime newStartDate = DateTime.Today;
 
-        [ObservableProperty]
-        private DateTime newEndDate = DateTime.Today.AddDays(1);
-
-        public ICommand SelectStartDateCommand => new AsyncRelayCommand(async () => await SelectStartDate());
-        public ICommand SelectEndDateCommand => new AsyncRelayCommand(async () => await SelectEndDate());
-
-
-
-
-        private async Task SelectStartDate()
-        {
-            DateTime? result = await ShowDatePicker(NewStartDate);
-            if (result.HasValue)
+        
+        private DateTime _newStartDate = DateTime.Today;
+        public DateTime NewStartDate { get { return _newStartDate; } 
+            set
             {
-                NewStartDate = result.Value;
-                
+                _newStartDate = value;
+                OnPropertyChanged();
+                LoadViableNumbers();
             }
         }
-        private async Task SelectEndDate()
+
+
+        private DateTime _newEndDate = DateTime.Today.AddDays(1);
+        public DateTime NewEndDate
         {
-            DateTime? result = await ShowDatePicker(NewEndDate);
-            if (result.HasValue)
+            get { return _newEndDate; }
+            set
             {
-                NewEndDate = result.Value;
-                
+                _newEndDate = value;
+                OnPropertyChanged();
+                LoadViableNumbers();
             }
         }
-        private async Task<DateTime?> ShowDatePicker(DateTime initalDate)
-        {
-            var datePicker = new DatePicker { Date = initalDate };
 
-            var popup = new ContentPage
-            {
-                Content = new VerticalStackLayout
-                {
-                    Padding = 20,
-                    Children =
-                    {
-                        new Label { Text = "Välj ett datum", FontSize = 20},
-                        datePicker,
-                        new Button
-                        {
-                            Text = "OK",
-                            Command = new Command(() => Application.Current.MainPage.Navigation.PopModalAsync())
 
-                        }
-                    }
-                }
-            };
-            await Application.Current.MainPage.Navigation.PushModalAsync(popup);
-            await Task.Delay(100);
+        
 
-            return datePicker.Date;
 
-        }
+
+
+
+
+
+        //public ICommand SelectStartDateCommand => new AsyncRelayCommand(async () => await SelectStartDate());
+        //public ICommand SelectEndDateCommand => new AsyncRelayCommand(async () => await SelectEndDate());
+        //private async Task SelectStartDate()
+        //{
+        //    DateTime? result = await ShowDatePicker(NewStartDate);
+        //    if (result.HasValue)
+        //    {
+        //        NewStartDate = result.Value;
+        //    }
+        //}
+        //private async Task SelectEndDate()
+        //{
+        //    DateTime? result = await ShowDatePicker(NewEndDate);
+        //    if (result.HasValue)
+        //    {
+        //        NewEndDate = result.Value;
+
+
+        //    }
+        //}
+        //private async Task<DateTime?> ShowDatePicker(DateTime initalDate)
+        //{
+        //    var datePicker = new DatePicker { Date = initalDate };
+
+        //    var popup = new ContentPage
+        //    {
+        //        Content = new VerticalStackLayout
+        //        {
+        //            Padding = 20,
+        //            Children =
+        //            {
+        //                new Label { Text = "Välj ett datum", FontSize = 20},
+        //                datePicker,
+        //                new Button
+        //                {
+        //                    Text = "OK",
+        //                    Command = new Command(() => Application.Current.MainPage.Navigation.PopModalAsync())
+
+        //                }
+        //            }
+        //        }
+        //    };
+        //    await Application.Current.MainPage.Navigation.PushModalAsync(popup);
+        //    await Task.Delay(100);
+
+        //    return datePicker.Date;
+
+        //}
     }
 }
