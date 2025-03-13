@@ -1,6 +1,7 @@
 ﻿
 
 using SnapphaneScoutDistriktBookingApp.Data;
+using System.Threading.Tasks;
 
 namespace SnapphaneScoutDistriktBookingApp
 {
@@ -19,20 +20,7 @@ namespace SnapphaneScoutDistriktBookingApp
             await Navigation.PushAsync(new BookingPage());
         }
 
-        private async void OnChangeToCabin(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Cabin());
-        }
-
-        private async void OnChangeToCampGrounds(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CampGrounds());
-        }
-
-        private async void OnChangeToLeanTo(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new LeanTo());
-        }
+        
         private async void CheckUserSession()
         {
             if (!Data.UserSession.Instance.IsUserSet())
@@ -68,7 +56,11 @@ namespace SnapphaneScoutDistriktBookingApp
             }
         }
 
-        
+        private async void OnClickedGoToAdminPage(object sender, EventArgs e)
+        {
+            
+            await Navigation.PushAsync(new Views.AdminPage());
+        }
     }
 
 }

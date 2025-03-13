@@ -77,7 +77,8 @@ public partial class BookingPage : ContentPage
 			NumberOfCanoes = int.TryParse(AntalKanoter.Text, out int result) ? result : null,
 			NumberOfCabin = int.TryParse(AntalStuga.Text, out int result1) ? result1 : null,
 			NumberOfCampground = int.TryParse(Lägerområde.Text, out int result2) ? result2 : null,
-			NumberOfLeanTo = int.TryParse(Vindskydd.Text, out int result3) ? result3 : null
+			NumberOfLeanTo = int.TryParse(Vindskydd.Text, out int result3) ? result3 : null,
+            IsConfirmed = false
 		};
 		await Data.DB.BookingCollection().InsertOneAsync(custumer);
 		API.SendEmail("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", "emil.berg@campusnykoping.se", custumer.Email, custumer);
@@ -93,7 +94,7 @@ public partial class BookingPage : ContentPage
                         new Button
                         {
                             Text = "Tillbaka till startsidan",
-                            Command = new Command(async () => await Navigation.PushModalAsync(new MainPage()))
+                            Command = new Command(async () => await Navigation.PopModalAsync())
 
                         }
                     }

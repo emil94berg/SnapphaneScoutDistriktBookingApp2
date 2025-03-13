@@ -44,46 +44,32 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     x:Name="BokaKanot"
-                    Text="Boka kanoter"
+                    Text="Boka"
                     Clicked="OnChangeToCanoe"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    
-                    
                 ></Button>
                 
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    x:Name="BokaStuga"
-                    Text="Boka stugan"
-                    Clicked="OnChangeToCabin"
+                    x:Name="InfoSidan"
+                    Text="Infosidan"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    
                     ></Button>
                 
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
-                    x:Name="BokaLägerOmråde"
-                    Text="Boka lägerområdet"
-                    Clicked="OnChangeToCampGrounds"
+                    x:Name="AdminSidan"
+                    Text="AdminSidan"
+                    Clicked="OnClickedGoToAdminPage"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    
                     ></Button>
                 
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    x:Name="BokaVindskydd"
-                    Text="Boka vindskydd"
-                    Clicked="OnChangeToLeanTo"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    
-                    ></Button>
+                
             </Grid>
             <Button Text="Ändra användare" Clicked="OnResetUser" ></Button>
         </VerticalStackLayout>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
@@ -8,8 +10,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace SnapphaneScoutDistriktBookingApp.Models
 {
-    internal class Customer
+    internal class Customer : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         [Flags]
         public enum TypeOfBooking
         {
@@ -33,9 +36,24 @@ namespace SnapphaneScoutDistriktBookingApp.Models
         public int? NumberOfCabin { get; set; }
         public int? NumberOfLeanTo { get; set; }
         public int? NumberOfCampground { get; set; }
+        private bool _isConfirmed;
+        public bool IsConfirmed { get { return _isConfirmed; }
+        set
+            {
+                _isConfirmed = value;
+                OnPropertyChanged();
+                _ = Data.DB.UpdateCheckBoxDatabaseAsync(this);
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
 
-       
+
+
 
     }
 }

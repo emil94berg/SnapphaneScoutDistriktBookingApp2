@@ -27,6 +27,20 @@ namespace SnapphaneScoutDistriktBookingApp.Data
             var bookingCollection = database.GetCollection<Models.Customer>("bookings");
             return bookingCollection;
         }
+        public static async Task UpdateCheckBoxDatabaseAsync(Models.Customer costumer)
+        {
+            try
+            {
+                var collection = BookingCollection();
+                var filter = Builders<Models.Customer>.Filter.Eq(x => x.Id, costumer.Id);
+                var update = Builders<Models.Customer>.Update.Set(x => x.IsConfirmed, costumer.IsConfirmed);
+                await collection.UpdateOneAsync(filter, update);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Fel vid uppdatering: {ex.Message}");
+            }
+        }
         
     }
 }
