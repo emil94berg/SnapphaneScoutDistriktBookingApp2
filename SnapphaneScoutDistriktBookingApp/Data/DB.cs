@@ -27,6 +27,22 @@ namespace SnapphaneScoutDistriktBookingApp.Data
             var bookingCollection = database.GetCollection<Models.Customer>("bookings");
             return bookingCollection;
         }
+        public static IMongoCollection<Models.Contact> ContactCollection()
+        {
+            var client = GetClient();
+
+            var database = client.GetDatabase("contactsDB");
+            var contactCollection = database.GetCollection<Models.Contact>("contacts");
+            return contactCollection;
+        }
+        public static IMongoCollection<Models.Info> InfoCollection()
+        {
+            var client = GetClient();
+
+            var database = client.GetDatabase("infoDB");
+            var infoCollection = database.GetCollection<Models.Info>("infostring");
+            return infoCollection;
+        }
         public static async Task UpdateCheckBoxDatabaseAsync(Models.Customer costumer)
         {
             try
@@ -41,7 +57,37 @@ namespace SnapphaneScoutDistriktBookingApp.Data
                 Console.WriteLine($"Fel vid uppdatering: {ex.Message}");
             }
         }
-        
+        public static IMongoCollection<Models.Admin> AdminUserCollection()
+        {
+            var client = GetClient();
+            var database = client.GetDatabase("adminUsers");
+            return database.GetCollection<Models.Admin>("adminUsers");
+        }
+
+        public static async Task<bool> RegisterAdminAsync(string userName, string userEmail, string password)
+        {
+            var collection = AdminUserCollection();
+
+            var existingUser = await collection.Find(x => x.Name == userName).FirstOrDefaultAsync();
+
+            if (existingUser != null)
+            {
+                return false;
+            }
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+            var newAdmin = new Models.Admin
+            {
+                Name = userName,
+                Email = userEmail,
+                PasswordHashed = hashedPassword
+            };
+
+            await collection.InsertOneAsync(newAdmin);
+            return true;
+        }
+
     }
 }
 

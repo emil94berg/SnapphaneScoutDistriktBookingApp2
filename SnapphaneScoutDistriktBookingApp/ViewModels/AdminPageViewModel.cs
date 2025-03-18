@@ -51,7 +51,7 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
         private async Task LoadAllNewBookingsAsync()
         {
             var data = await GetAllBookingsFromDB();
-            var newData = data.Where(x => x.StartDate >= DateTime.Now).Select(x => x).ToList();
+            var newData = data.Where(x => x.StartDate.Date >= DateTime.Today).ToList();
             Bookings.Clear();
             foreach(var newBookings in newData)
             {

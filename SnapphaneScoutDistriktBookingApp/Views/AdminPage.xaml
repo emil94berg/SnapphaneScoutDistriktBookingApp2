@@ -12,6 +12,9 @@
         <Label Text="Välkommen!" ></Label>
         <Button Text="Lista alla bokningar" Command="{Binding ListAllBookingsCommand}"></Button>
         <Button Text="Lista all nya bokningar" Command="{Binding ListAllNewBookingsCommand}" ></Button>
+        <Button Text="Lägg till kontakt" Clicked="OnClickedAddContact" ></Button>
+        <Button Text="Lägg till/ändra info" Clicked="OnClickedChangeInfo" ></Button>
+            
         <ListView ItemsSource="{Binding Bookings}" ItemSelected="OnBookingSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>

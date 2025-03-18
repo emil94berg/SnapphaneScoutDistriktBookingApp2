@@ -77,7 +77,7 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
         {
             DateTime start = NewStartDate;
             DateTime end = NewEndDate;
-            var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.EndDate >= end && x.StartDate <= start)).ToListAsync();
+            var bookingCollection = await Data.DB.BookingCollection().Find(Builders<Models.Customer>.Filter.Where(x => x.StartDate <= end && x.EndDate >= start)).ToListAsync();
             int[] totalSum = new int[4];
             totalSum[0] = bookingCollection.Sum(x => x.NumberOfCanoes.GetValueOrDefault());
             

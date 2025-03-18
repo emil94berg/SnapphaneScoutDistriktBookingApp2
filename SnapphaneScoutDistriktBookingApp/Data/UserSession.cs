@@ -20,7 +20,9 @@ namespace SnapphaneScoutDistriktBookingApp.Data
 
         public static UserSession Instance => instance.Value;
         private string _userName;
-        public string UserName { get { return _userName; }
+        public string UserName
+        {
+            get { return _userName; }
             set
             {
                 _userName = value;
@@ -28,6 +30,8 @@ namespace SnapphaneScoutDistriktBookingApp.Data
             }
         }
         public string UserEmail { get; set; } = string.Empty;
+
+        public bool IsAdmin { get; private set; } = false;
 
         protected void OnPropertyChanged()
         {
@@ -37,6 +41,7 @@ namespace SnapphaneScoutDistriktBookingApp.Data
         {
             UserName = Preferences.Get("Användarnamn", string.Empty);
             UserEmail = Preferences.Get("Användarmail", string.Empty);
+            IsAdmin = Preferences.Get("IsAdmin", false);
         }
 
         public void SetUser(string userName, string userEmail)
@@ -56,8 +61,15 @@ namespace SnapphaneScoutDistriktBookingApp.Data
         {
             Preferences.Remove("Användarnamn");
             Preferences.Remove("Användarmail");
+            Preferences.Remove("IsAdmin");
             UserName = string.Empty;
             UserEmail = string.Empty;
+            IsAdmin = false;
+        }
+
+        public void SetAdmin(bool isAdmin)
+        {
+            IsAdmin = isAdmin;
         }
     }
 }

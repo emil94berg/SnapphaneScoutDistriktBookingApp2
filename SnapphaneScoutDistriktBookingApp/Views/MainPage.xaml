@@ -57,6 +57,7 @@
                     Text="Infosidan"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
+                    Clicked="OnClickedGoToInfoPage"
                     ></Button>
                 
                 <Button

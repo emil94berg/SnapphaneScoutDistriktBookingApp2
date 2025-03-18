@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace SnapphaneScoutDistriktBookingApp.Views;
 
 public partial class AdminPage : ContentPage
@@ -18,4 +20,18 @@ public partial class AdminPage : ContentPage
 			await Navigation.PushAsync(page);
 		}
     }
+
+    
+
+    private async void OnClickedAddContact(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Views.AddContactPopUpPage());
+    }
+
+    private async void OnClickedChangeInfo(object sender, EventArgs e)
+    {
+		await Navigation.PushAsync(new Views.UpdateInfoPopUpPage());
+    }
+
+    
 }

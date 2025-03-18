@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnapphaneScoutDistriktBookingApp.Views.AddContactPopUpPage"
+             Title="AddContactPopUpPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Lägg till kontakt"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry x:Name="xName" Placeholder="Namn på kontakt"></Entry>
+        <Entry x:Name="xEmail" Placeholder="Email till kontakt" ></Entry>
+        <Entry x:Name="xPhone" Placeholder="Tele nr till kontakt" ></Entry>
+        <Button Text="Klar" Clicked="OnClickedPopPopUp"></Button>
+    </VerticalStackLayout>
+</ContentPage>

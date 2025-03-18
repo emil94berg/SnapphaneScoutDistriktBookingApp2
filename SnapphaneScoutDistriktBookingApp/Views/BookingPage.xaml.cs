@@ -21,10 +21,6 @@ public partial class BookingPage : ContentPage
 		BindingContext = new BookingViewModel();
         myName.Text = UserSession.Instance.UserName;
         myEmail.Text = UserSession.Instance.UserEmail;
-        
-        //Lediga_kanoter.Text = "Lediga kanoter : " + (14 - task.Result[0]).ToString();
-        //Lediga_stugor.Text = "Lediga stugor : " + (1 - task.Result[1]).ToString();
-        //Lediga_vindskydd.Text = "Lediga vindskydd : " + (4 - task.Result[2]).ToString();
     }
     private void OnCheckChange(object sender, CheckedChangedEventArgs e)
     {
@@ -71,8 +67,8 @@ public partial class BookingPage : ContentPage
 			Email = myEmail.Text,
 			IsOrg = myCheckBox.IsChecked,
 			OrgName = (myCheckBox.IsChecked == true ? orgNameInput.Text : ""),
-			StartDate = MyStartDate.Date,
-			EndDate = MyEndDate.Date,
+			StartDate = MyStartDate.Date.AddHours(1),
+			EndDate = MyEndDate.Date.AddHours(1),
 			BookingType = bookingtype,
 			NumberOfCanoes = int.TryParse(AntalKanoter.Text, out int result) ? result : null,
 			NumberOfCabin = int.TryParse(AntalStuga.Text, out int result1) ? result1 : null,
@@ -93,7 +89,7 @@ public partial class BookingPage : ContentPage
 
                         new Button
                         {
-                            Text = "Tillbaka till startsidan",
+                            Text = "Tillbaka",
                             Command = new Command(async () => await Navigation.PopModalAsync())
 
                         }
@@ -152,8 +148,5 @@ public partial class BookingPage : ContentPage
         }
     }
 
-    private void OnSelectedStartDate(object sender, DateChangedEventArgs e)
-    {
-        
-    }
+   
 }
