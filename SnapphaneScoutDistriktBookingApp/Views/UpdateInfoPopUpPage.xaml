@@ -8,7 +8,7 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Entry Text="{Binding Info}" Placeholder="Skriv infotexten här"></Entry>
+        <Editor AutoSize="TextChanges" Text="{Binding Info}" Placeholder="Skriv infotexten här"></Editor>
         <Button Text="Uppdatera" Command="{Binding UpdateInfoCommand}" ></Button>
     </VerticalStackLayout>
 </ContentPage>

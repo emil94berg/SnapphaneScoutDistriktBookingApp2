@@ -50,6 +50,7 @@ namespace SnapphaneScoutDistriktBookingApp.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public bool EmailConformation { get; set; } = false;
 
 
 

@@ -18,16 +18,18 @@
         <Entry
             x:Name="myName"
             Placeholder="Skriv in för och efternamn"
-            
+            Keyboard="Chat"
             ></Entry>
         <Entry
             x:Name="myPhone"
             Placeholder="Telefonnummer"
+            Keyboard="Numeric"
             ></Entry>
         <Entry
             x:Name="myEmail"
             Placeholder="Skriv in din email"
-            
+            Keyboard="Email"
+            TextTransform="None"
             ></Entry>
         
         <HorizontalStackLayout>
@@ -66,7 +68,7 @@
             MaximumDate="2100-12-31"
             Format="yyyy-MM-dd"
             ></DatePicker>
-        <Label Text="{Binding NewEndDate}" ></Label>
+        
         <HorizontalStackLayout Spacing="10">
             <CheckBox
             x:Name="checkCanoe"
