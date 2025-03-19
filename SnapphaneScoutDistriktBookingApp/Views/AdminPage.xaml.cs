@@ -23,8 +23,6 @@ public partial class AdminPage : ContentPage
 		}
     }
 
-    
-
     private async void OnClickedAddContact(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new Views.AddContactPopUpPage());

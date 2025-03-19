@@ -9,7 +9,6 @@ namespace SnapphaneScoutDistriktBookingApp.Data
 {
     class DB
     {
-        
         private static MongoClient GetClient()
         {
             const string connectionUri = "mongodb+srv://dbAdmin:DBadmin00@hultetbooking.h5urq.mongodb.net/?retryWrites=true&w=majority&appName=HultetBooking";

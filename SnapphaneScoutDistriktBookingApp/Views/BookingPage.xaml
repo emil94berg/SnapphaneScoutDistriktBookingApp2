@@ -4,8 +4,6 @@
              x:Class="SnapphaneScoutDistriktBookingApp.BookingPage"
              Title="Bokningssida"
              >
-    
-
     <VerticalStackLayout>
         <HorizontalStackLayout Spacing="10">
             <Label x:Name="Lediga_kanoter" Text="{Binding CanoesAvailable, StringFormat='Kanoter lediga: {0}'}" ></Label>
@@ -13,8 +11,6 @@
             <Label x:Name="Lediga_lägerområden" Text="{Binding CampGroundAvailable, StringFormat='Antal på lägerområdet: {0}'}" ></Label>
             <Label x:Name="Lediga_vindskydd" Text="{Binding LeanToAvailable, StringFormat='Vindskydd lediga: {0}'}" ></Label>
         </HorizontalStackLayout>
-       
-       
         <Entry
             x:Name="myName"
             Placeholder="Skriv in för och efternamn"

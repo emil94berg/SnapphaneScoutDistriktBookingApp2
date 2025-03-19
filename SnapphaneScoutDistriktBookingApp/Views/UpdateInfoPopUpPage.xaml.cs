@@ -7,6 +7,4 @@ public partial class UpdateInfoPopUpPage : ContentPage
 		InitializeComponent();
 		BindingContext = new ViewModels.InfoPageViewModel();
 	}
-	
-	
 }

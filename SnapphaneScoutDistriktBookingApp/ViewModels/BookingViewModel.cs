@@ -22,7 +22,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             {
                 _canoesAvailable = value;
                 OnPropertyChanged();
-                //LoadViableNumbers();
             }
         }
 
@@ -31,7 +30,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             {
                 _cabinAvailable = value;
                 OnPropertyChanged();
-                //LoadViableNumbers();
             }
         }
 
@@ -43,7 +41,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             {
                 _leanToAvailable = value;
                 OnPropertyChanged();
-                //LoadViableNumbers();
             }
         }
 
@@ -56,7 +53,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             {
                 _campGroundAvailable = value;
                 OnPropertyChanged();
-                //LoadViableNumbers();
             }
         }
 
@@ -90,9 +86,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             return totalSum;
         }
 
-        //----------------------------------------------------------------------------------------
-
-        
         private DateTime _newStartDate = DateTime.Today;
         public DateTime NewStartDate { get { return _newStartDate; } 
             set
@@ -102,7 +95,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
                 LoadViableNumbers();
             }
         }
-
 
         private DateTime _newEndDate = DateTime.Today.AddDays(1);
         public DateTime NewEndDate
@@ -115,63 +107,5 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
                 LoadViableNumbers();
             }
         }
-
-
-        
-
-
-
-
-
-
-
-        //public ICommand SelectStartDateCommand => new AsyncRelayCommand(async () => await SelectStartDate());
-        //public ICommand SelectEndDateCommand => new AsyncRelayCommand(async () => await SelectEndDate());
-        //private async Task SelectStartDate()
-        //{
-        //    DateTime? result = await ShowDatePicker(NewStartDate);
-        //    if (result.HasValue)
-        //    {
-        //        NewStartDate = result.Value;
-        //    }
-        //}
-        //private async Task SelectEndDate()
-        //{
-        //    DateTime? result = await ShowDatePicker(NewEndDate);
-        //    if (result.HasValue)
-        //    {
-        //        NewEndDate = result.Value;
-
-
-        //    }
-        //}
-        //private async Task<DateTime?> ShowDatePicker(DateTime initalDate)
-        //{
-        //    var datePicker = new DatePicker { Date = initalDate };
-
-        //    var popup = new ContentPage
-        //    {
-        //        Content = new VerticalStackLayout
-        //        {
-        //            Padding = 20,
-        //            Children =
-        //            {
-        //                new Label { Text = "Välj ett datum", FontSize = 20},
-        //                datePicker,
-        //                new Button
-        //                {
-        //                    Text = "OK",
-        //                    Command = new Command(() => Application.Current.MainPage.Navigation.PopModalAsync())
-
-        //                }
-        //            }
-        //        }
-        //    };
-        //    await Application.Current.MainPage.Navigation.PushModalAsync(popup);
-        //    await Task.Delay(100);
-
-        //    return datePicker.Date;
-
-        //}
     }
 }

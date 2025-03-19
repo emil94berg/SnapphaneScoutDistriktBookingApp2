@@ -8,16 +8,11 @@ namespace SnapphaneScoutDistriktBookingApp
 {
     public partial class MainPage : ContentPage
     {
-
         public MainPage()
         {
             InitializeComponent();
             OnAppearing();
-            
             BindingContext = UserSession.Instance;
-            
-            
-            
         }
         bool pageStarted = false;
         protected override async void OnAppearing()
@@ -38,15 +33,12 @@ namespace SnapphaneScoutDistriktBookingApp
             {
                 AdminSidan.IsVisible = true;
             }
-
         }
 
         private async void OnChangeToCanoe(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new BookingPage());
         }
-
-
         private async Task CheckUserSession()
         {
             if (!Data.UserSession.Instance.IsUserSet())
@@ -71,7 +63,6 @@ namespace SnapphaneScoutDistriktBookingApp
 
         private async void OnClickedGoToAdminPage(object sender, EventArgs e)
         {
-            
             await Navigation.PushAsync(new Views.AdminPage());
         }
 
@@ -80,5 +71,4 @@ namespace SnapphaneScoutDistriktBookingApp
             await Navigation.PushAsync(new Views.InfoPage());
         }
     }
-
 }

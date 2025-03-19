@@ -40,7 +40,6 @@ public partial class BookingPage : ContentPage
 	
     private async void OnConformation(object sender, EventArgs e)
     {
-
 		Models.Customer.TypeOfBooking bookingtype = Models.Customer.TypeOfBooking.None;
 		if(checkCanoe.IsChecked == true)
 		{
@@ -59,7 +58,6 @@ public partial class BookingPage : ContentPage
 			bookingtype |= Models.Customer.TypeOfBooking.Lägerplats;
 		}
 
-		
 		var custumer = new Models.Customer()
 		{
 			Name = myName.Text,
@@ -99,7 +97,6 @@ public partial class BookingPage : ContentPage
         await Navigation.PushModalAsync(popup);
     }
 	
-
     private void OnCheckCanoe(object sender, CheckedChangedEventArgs e)
     {
 		if (e.Value)
@@ -147,6 +144,4 @@ public partial class BookingPage : ContentPage
             Vindskydd.IsVisible = false;
         }
     }
-
-   
 }

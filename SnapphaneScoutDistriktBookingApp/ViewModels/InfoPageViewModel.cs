@@ -60,13 +60,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
                 Contacts.Add(x);
             }
         }
-        private async Task<string> GetThisInfo()
-        {
-            var data = await Data.DB.InfoCollection().Find(Builders<Models.Info>.Filter.Empty).ToListAsync();
-            var thisData = data.FirstOrDefault();
-            var infoStringData = thisData.InfoString;
-            return infoStringData;
-        }
         private async Task UpdateInfoDBAsync()
         {
             //string infoStringData = await GetThisInfo();
@@ -85,13 +78,6 @@ namespace SnapphaneScoutDistriktBookingApp.ViewModels
             var allInfoStringData = await Data.DB.InfoCollection().Find(Builders<Models.Info>.Filter.Empty).ToListAsync();
             string infoStringData = allInfoStringData.FirstOrDefault().InfoString;
             Info = infoStringData;
-
-            
         }
-
-
-
-
-
     }
 }

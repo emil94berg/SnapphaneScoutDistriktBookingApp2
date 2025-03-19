@@ -14,7 +14,7 @@ namespace SnapphaneScoutDistriktBookingApp.Data
     {
         public static async Task SendEmail(string apiKey, string fromEmail, string toEmail, Models.Customer costumer)
         {
-            toEmail = "oscar.lejon@campusnykoping.se";
+            toEmail = "emil94berg@gmail.com";
             string bokningsNummer = "";
             if(costumer.NumberOfCanoes != null)
             {
@@ -33,9 +33,6 @@ namespace SnapphaneScoutDistriktBookingApp.Data
                 bokningsNummer += "<br> Antal i stugan: " + costumer.NumberOfCabin;
             }
 
-
-
-
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(fromEmail, "Snapphane Scoutdistrikt");
             var subject = "Bokning av: " + costumer.BookingType;
@@ -49,8 +46,6 @@ namespace SnapphaneScoutDistriktBookingApp.Data
             var response = await client.SendEmailAsync(msg);
             Console.WriteLine($"E-post skickad! Statuskod: {response.StatusCode}");
         }
-
-
 
         public static async Task SendEmailConformation(string apiKey, string fromEmail, string toEmail, Models.Customer costumer)
         {
@@ -72,12 +67,9 @@ namespace SnapphaneScoutDistriktBookingApp.Data
                 bokningsNummer += "<br> Antal i stugan: " + costumer.NumberOfCabin;
             }
 
-
-
-
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(fromEmail, "Snapphane Scoutdistrikt");
-            var subject = "Bokning av" + costumer.BookingType;
+            var subject = "Bokning av: " + costumer.BookingType;
             var to = new EmailAddress(toEmail, "Mottagare");
             string plainTextContent = $"Tack för bokning! Du har bokat datumen: {costumer.StartDate} till den {costumer.EndDate}. {bokningsNummer}"; //info //Namn
             string infoString = plainTextContent.Replace("\t", "<br>");
